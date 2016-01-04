@@ -1,8 +1,6 @@
 # Actors
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/actors`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Actors is a simple library that provides an alternative to pub/sub and actors-model patterns. Actually Actors is a compromise between pub/sub and actors.
 
 ## Installation
 
@@ -22,12 +20,24 @@ Or install it yourself as:
 
 ## Usage
 
+```ruby
 hub = Actors.hub(:demiurge_board)
 
-hub.actors.add :registrator,         ->(data) { ... }, subscribed_on: [], publishes_to: []
-hub.actors.add :confirmation_mailer, ->(data) { ... }, subscribed_on: [], publishes_to: []
+hub.actors.add :registrator,
+  ->(data) { ... }, publishes_to: [:registrations]
 
+hub.actors.add :registration_confirmator,
+  ->(data) { ... }, subscribed_on: [:registration]
 
+actor = hub.actors[:registrator]
+
+actor.call({
+  login:    "egoholic",
+  email:    "user@example.com",
+  password: "12345678",
+  password_confirmation: "12345678"
+})
+```
 
 ## Development
 
