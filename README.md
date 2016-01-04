@@ -22,7 +22,12 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+hub = Actors.hub(:demiurge_board)
+
+hub.actors.add :registrator,         ->(data) { ... }, subscribed_on: [], publishes_to: []
+hub.actors.add :confirmation_mailer, ->(data) { ... }, subscribed_on: [], publishes_to: []
+
+
 
 ## Development
 
