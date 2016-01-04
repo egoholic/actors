@@ -10,6 +10,8 @@ module Actors
     end
 
     def publish(message)
+      raise ArgumentError, "'message' should be an instance of Hash" unless message.instance_of? Hash
+
       @subscribers.keys.each do |name|
         @subscribers[name].call message
       end

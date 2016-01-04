@@ -44,8 +44,8 @@ RSpec.describe Actors::Actor do
 
       context "when bad args" do
         it "raises ArgumentError" do
-          expect { subject.new }.to                     raise_error(ArgumentError).with_message(/wrong number of arguments/)
-          expect { subject.new nil }.to                 raise_error(ArgumentError).with_message(/wrong number of arguments/)
+          expect { subject.new }.to                     raise_error(ArgumentError).with_message(/\Awrong number of arguments/)
+          expect { subject.new nil }.to                 raise_error(ArgumentError).with_message(/\Awrong number of arguments/)
           expect { subject.new nil, nil }.to            raise_error(ArgumentError).with_message("'name' should be an instance of Symbol")
           expect { subject.new true, nil }.to           raise_error(ArgumentError).with_message("'name' should be an instance of Symbol")
           expect { subject.new "registrator", nil }.to  raise_error(ArgumentError).with_message("'name' should be an instance of Symbol")
@@ -83,9 +83,12 @@ RSpec.describe Actors::Actor do
         end
       end
 
-      xcontext "when bad args" do
+      context "when bad args" do
         it "raises ArgumentError" do
-
+          expect { subject.call }.to      raise_error(ArgumentError).with_message(/\Awrong number of arguments/)
+          expect { subject.call nil }.to  raise_error(ArgumentError).with_message("'message' should be an instance of Hash")
+          expect { subject.call true }.to raise_error(ArgumentError).with_message("'message' should be an instance of Hash")
+          expect { subject.call [] }.to   raise_error(ArgumentError).with_message("'message' should be an instance of Hash")
         end
       end
     end

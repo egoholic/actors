@@ -13,6 +13,8 @@ module Actors
     end
 
     def call(message)
+      raise ArgumentError, "'message' should be an instance of Hash" unless message.instance_of? Hash
+
       result = @executable.call(message)
       @channels.each { |channel| channel.publish result }
     end

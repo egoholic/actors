@@ -17,7 +17,7 @@ RSpec.describe Actors::Channel do
 
       context "when bad args" do
         it "raises ArgumentError" do
-          expect { subject.new }.to                 raise_error(ArgumentError).with_message(/wrong number of arguments/)
+          expect { subject.new }.to                 raise_error(ArgumentError).with_message(/\Awrong number of arguments/)
           expect { subject.new nil }.to             raise_error(ArgumentError).with_message("'name' should be an instance of Symbol")
           expect { subject.new true }.to            raise_error(ArgumentError).with_message("'name' should be an instance of Symbol")
           expect { subject.new "registrations" }.to raise_error(ArgumentError).with_message("'name' should be an instance of Symbol")
@@ -81,7 +81,12 @@ RSpec.describe Actors::Channel do
       end
 
       context "when bad args" do
-
+        it "raises ArgumentError" do
+          expect { subject.publish }.to      raise_error(ArgumentError).with_message(/\Awrong number of arguments/)
+          expect { subject.publish nil }.to  raise_error(ArgumentError).with_message("'message' should be an instance of Hash")
+          expect { subject.publish true }.to raise_error(ArgumentError).with_message("'message' should be an instance of Hash")
+          expect { subject.publish [] }.to   raise_error(ArgumentError).with_message("'message' should be an instance of Hash")
+        end
       end
     end
   end

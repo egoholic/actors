@@ -13,7 +13,7 @@ RSpec.describe Actors::Hub do
 
       context "when bad args" do
         it "raises ArgumentError" do
-          expect { subject.new } .to                 raise_error(ArgumentError).with_message(/wrong number of arguments/)
+          expect { subject.new } .to                 raise_error(ArgumentError).with_message(/\Awrong number of arguments/)
           expect { subject.new nil }.to              raise_error(ArgumentError).with_message("'name' should be an instance of Symbol")
           expect { subject.new true }.to             raise_error(ArgumentError).with_message("'name' should be an instance of Symbol")
           expect { subject.new "demiurge board" }.to raise_error(ArgumentError).with_message("'name' should be an instance of Symbol")

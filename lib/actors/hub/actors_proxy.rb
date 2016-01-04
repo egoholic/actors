@@ -4,6 +4,9 @@ module Actors
     	require "typed_map"
 
       def initialize(actors, channels)
+        raise ArgumentError, "'actors' should be an instance of TypedMap"   unless actors.instance_of? TypedMap
+        raise ArgumentError, "'channels' should be an instance of TypedMap" unless channels.instance_of? TypedMap
+
         @actors   = actors
         @channels = channels
       end
@@ -31,8 +34,8 @@ module Actors
         @actors[key]
       end
 
-      def has?
-        @actors.has?
+      def has?(key)
+        @actors.has? key
       end
 
       def count
