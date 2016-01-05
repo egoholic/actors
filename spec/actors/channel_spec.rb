@@ -75,6 +75,7 @@ RSpec.describe Actors::Channel do
         it "sends message to subscribers" do
           expect { subject.publish text: "some text" }
             .to change { log1 }.from([]).to([{text: "some text"}])
+
           expect { subject.publish text: "some text" }
             .to change { log2 }.from([{text: "some text"}]).to([{text: "some text"}, {text: "some text"}])
         end
